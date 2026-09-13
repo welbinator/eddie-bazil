@@ -13,7 +13,7 @@ const { size = '440px', float = true } = Astro.props;
   </div>
 </div>
 <style>
-  .sphere { position: relative; width: var(--size); height: var(--size); max-width: 100%; aspect-ratio: 1; display: grid; place-items: center; }
+  .sphere { position: relative; width: min(var(--size), 100%); max-width: var(--size); aspect-ratio: 1; height: auto; display: grid; place-items: center; }
   .sphere__core {
     position: absolute; inset: 12%;
     border-radius: 50%;
@@ -28,7 +28,7 @@ const { size = '440px', float = true } = Astro.props;
     filter: blur(28px);
   }
   .sphere__ring { position: absolute; inset: 4%; border-radius: 50%; border: 1px solid var(--stone); }
-  .sphere__ring--2 { inset: -6%; border-color: rgba(235,232,228,0.7); }
+  .sphere__ring--2 { inset: 0; border-color: rgba(235,232,228,0.7); }
   .sphere__play {
     position: relative; z-index: 2;
     width: 64px; height: 64px; border-radius: 50%;
