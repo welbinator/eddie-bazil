@@ -1,0 +1,106 @@
+---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const articles = [
+  { t: 'Layers of Complexity', u: 'https://www.soundonsound.com/techniques/layers-complexity' },
+  { t: 'Mixing to a Pink Noise Reference', u: 'https://www.soundonsound.com/techniques/mixing-pink-noise-reference' },
+  { t: 'Beat Ripping', u: 'https://www.soundonsound.com/techniques/beat-ripping' },
+  { t: 'DIY Mastering Made Easy', u: 'https://www.soundonsound.com/techniques/diy-mastering-made-easy' },
+  { t: 'Creative M-S Techniques', u: 'https://www.soundonsound.com/techniques/creative-m-s-techniques' },
+  { t: 'Sounding Off: Black Friday Sales', u: 'https://www.soundonsound.com/people/sounding-black-friday-sales' },
+];
+const podcasts = [
+  { t: 'Vocal Processing Techniques', u: 'https://www.soundonsound.com/techniques/vocal-processing-techniques-sos-podcast' },
+  { t: 'Using Tube and Tape Plugins', u: 'https://www.soundonsound.com/techniques/using-tube-and-tape-plug-ins-sos-podcast' },
+  { t: 'Creating Musical Snippets', u: 'https://www.soundonsound.com/techniques/creating-musical-snippets-sos-podcast' },
+  { t: 'Drum Beat Construction, Part 1', u: 'https://www.soundonsound.com/techniques/drum-beat-construction-part-1-sos-podcast' },
+  { t: 'Drum Beat Construction, Part 2', u: 'https://www.soundonsound.com/techniques/drum-beat-construction-part-2-sos-podcast' },
+  { t: 'Compression and Expansion', u: 'https://www.soundonsound.com/techniques/compression-and-expansion-podcast' },
+  { t: 'Sound Design using Filters', u: 'https://www.soundonsound.com/techniques/sound-design-using-filters-podcast' },
+  { t: 'Using Vocoder Plug-ins', u: 'https://www.soundonsound.com/techniques/using-vocoder-plug-ins-podcast' },
+  { t: 'Using Dynamic EQ', u: 'https://www.soundonsound.com/techniques/using-dynamic-eq-podcast' },
+  { t: 'Using Delay Effects', u: 'https://www.soundonsound.com/techniques/using-delay-effects-podcast' },
+];
+---
+<Layout title="About Eddie Bazil | Sound designer, engineer & educator" description="The story behind Eddie Bazil: from a first Arp 2600 synth to sound design for Emu, Ensoniq and Roland, building Samplecraze, and mentoring for the Recording Academy.">
+
+  <section class="phead">
+    <div class="wrap phead__inner">
+      <div>
+        <p class="eyebrow">About</p>
+        <h1 class="display">A life spent chasing sound.</h1>
+        <p class="lead">Programmer, sound designer, mix engineer, author and teacher. Here is how it all came together, in my own words.</p>
+      </div>
+      <img class="phead__img" src={`${base}/images/eddie-bazil-about.jpg`} alt="Eddie Bazil at work in his studio" width="720" height="205" />
+    </div>
+  </section>
+
+  <section class="section prose">
+    <div class="wrap prose__wrap">
+      <div class="prose__body rise">
+        <h2 class="heading-sm">The beginning</h2>
+        <p>To be honest, I have been fortunate. I come from an artistic and musical family. I have always been around music and, although I have never been a good performer, I have always been fascinated by sound. My desire to learn as much as I could about creating sounds culminated in acquiring my first synthesizer, an Arp 2600. Once I cut my teeth on that wonderful semi-modular synth I went hunting for more, and when I felt I had achieved a modicum of success as a programmer I began programming synths for some of the Electro and New Wave labels and artists of the time.</p>
+
+        <h2 class="heading-sm">Designing sound for the industry</h2>
+        <p>By my mid twenties I had moved away from programming for bands and labels and began working as a sound designer for hardware manufacturers, including Emu, Ensoniq, Akai and Roland. My job was to create the sound ROMs for their synthesizers and samplers. I freelanced for those three companies until I signed with Emu and Ensoniq exclusively as one of their in house sound designers.</p>
+        <p>When Emu moved into software, my skills adapted with them. I built libraries for Native Instruments, Kiesel, Arturia and Propellerheads, and eventually met Phil Allen, a Capital Radio DJ, and together we formed Samplecraze, a company dedicated to sound libraries for manufacturers and users alike.</p>
+
+        <h2 class="heading-sm">Samplecraze and going back to school</h2>
+        <p>A year later Phil and I parted ways and I took Samplecraze on alone, building it over the next twenty years. During that time I decided to move away from pure sound design and into music production. To do it properly I went back to college, took a one year course at the Gateway School of Music and came away with a distinction in Audio Technology. The next decade was spent studying the craft, and I began dipping my toe into the remix world. I was also commissioned by the Cambridge Shakespeare Company to write the score for a production of Macbeth at Alexandra Palace.</p>
+
+        <h2 class="heading-sm">Giving back</h2>
+        <p>Over the past twenty years I have run council workshops and youth training schemes for Southwark Council and taught music production to college students for Global Entertainment. I have consulted for a number of the UK's main studios and written several books on audio production. I developed Samplecraze into an educational resource, which led to writing for industry magazines and, in time, to Sound On Sound, where I am a contributing writer and a moderator on what is the premier audio forum on the internet.</p>
+        <p>Recently the Recording Academy invited me to become a professional member, an approved educator and a mentor to their members. I accepted with no hesitation. I feel honoured and blessed, and I intend to give back as much as I can to an industry that has enriched my life both artistically and spiritually.</p>
+
+        <h2 class="heading-sm">Today</h2>
+        <p>I now concentrate solely on teaching students one to one and creating content for Sound On Sound. If you would like to work with me, I would be glad to hear from you.</p>
+        <a href={`${base}/contact`} class="btn btn--filled">Book a free consultation</a>
+      </div>
+
+      <aside class="prose__side">
+        <div class="side-card card rise">
+          <div class="side-card__badge">
+            <img src={`${base}/images/grammy.png`} alt="Grammy Recording Academy logo" width="120" />
+          </div>
+          <p class="body-muted">Recording Academy professional member, approved educator and mentor. Contributing writer and forum moderator for Sound On Sound magazine.</p>
+        </div>
+
+        <div class="side-links rise">
+          <h3 class="side-h">Articles for Sound On Sound</h3>
+          <ul>{articles.map((a) => <li><a href={a.u} target="_blank" rel="noopener">{a.t} ↗</a></li>)}</ul>
+        </div>
+
+        <div class="side-links rise">
+          <h3 class="side-h">Podcasts for Sound On Sound</h3>
+          <ul>{podcasts.map((a) => <li><a href={a.u} target="_blank" rel="noopener">{a.t} ↗</a></li>)}</ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <style>
+    .phead { padding: 72px 0 56px; border-bottom: 1px solid var(--stone); }
+    .phead__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .phead .display { margin: 8px 0 20px; }
+    .phead__img { border-radius: var(--radius-large); box-shadow: var(--shadow-subtle); }
+
+    .prose__wrap { display: grid; grid-template-columns: 1.5fr 1fr; gap: 64px; align-items: start; }
+    .prose__body h2 { margin: 40px 0 12px; }
+    .prose__body h2:first-child { margin-top: 0; }
+    .prose__body .btn { margin-top: 32px; }
+
+    .prose__side { position: sticky; top: 92px; display: flex; flex-direction: column; gap: 24px; }
+    .side-card__badge { margin-bottom: 16px; }
+    .side-links { padding: 4px 0; }
+    .side-h { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ash); margin-bottom: 12px; }
+    .side-links ul { list-style: none; }
+    .side-links li { border-bottom: 1px solid var(--stone); }
+    .side-links a { display: block; padding: 11px 0; font-size: 14px; color: var(--smoke); transition: color .2s; }
+    .side-links a:hover { color: var(--ink); }
+
+    @media (max-width: 900px) {
+      .phead__inner, .prose__wrap { grid-template-columns: 1fr; }
+      .prose__side { position: static; }
+    }
+  </style>
+</Layout>

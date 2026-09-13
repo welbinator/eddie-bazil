@@ -1,0 +1,112 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AudioSphere from '../components/AudioSphere.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const tuitionPoints = [
+  'Courses designed around your goals and experience, never a fixed syllabus',
+  'Sound design, mixing and full production covered in depth',
+  'An old school approach to knowledge transfer, with fun kept firmly in the mix',
+  'A free 30 minute consultation before any formal engagement',
+];
+---
+<Layout title="Services | Tuition, mixing, production & mastering | Eddie Bazil" description="Private one to one tuition, mixing and production, and stem or stereo mastering with Eddie Bazil. Over 35 years of studio experience across every genre.">
+
+  <section class="phead">
+    <div class="wrap">
+      <p class="eyebrow">Services</p>
+      <h1 class="display">Three services, one standard.</h1>
+      <p class="lead">Whether you want to learn the craft, finish a record or polish a master, you get the same thing: decades of experience and honest, obligation free advice.</p>
+    </div>
+  </section>
+
+  <!-- Tuition -->
+  <section id="tuition" class="section svc-block">
+    <div class="wrap svc-block__inner">
+      <div class="svc-block__copy rise">
+        <p class="eyebrow">01 · Private tuition</p>
+        <h2 class="heading">Learn in the comfort of your own home</h2>
+        <p>I have been teaching for over twenty five years and, without doubt, it is the most rewarding of all my music related experiences. People's objectives and levels of experience vary enormously, so I take the view that every course should be carefully designed to meet the needs of the individual.</p>
+        <p>In a world of shortcuts, you still cannot beat an old school approach to knowledge transfer. I make sure you understand the principles you need to navigate a complex industry, and from decades of teaching I know students retain far more when the subject is genuinely fun to explore.</p>
+        <ul class="ticks">
+          {tuitionPoints.map((p) => <li>{p}</li>)}
+        </ul>
+        <a href={`${base}/contact`} class="btn btn--filled">Claim your free consultation</a>
+      </div>
+      <div class="svc-block__art rise"><AudioSphere size="360px" /></div>
+    </div>
+  </section>
+
+  <!-- Mixing & Production -->
+  <section id="mixing" class="section section--taupe svc-block">
+    <div class="wrap svc-block__inner svc-block__inner--rev">
+      <div class="svc-block__copy rise">
+        <p class="eyebrow">02 · Mixing & production</p>
+        <h2 class="heading">From rough idea to finished record</h2>
+        <p>If you are a songwriter and want a finished product ready for the streaming platforms or a physical release, give me a call. I am happy to sit down and discuss your needs in detail, whether or not you end up hiring me. At the very least you will get detailed, honest advice on your creation.</p>
+        <p>I specialise in EDM and hip hop, but I have mixed and produced tracks and albums across many genres, including film and TV. Tell me about your project and we can work out exactly what it needs, and hopefully become friends in the process.</p>
+        <a href={`${base}/contact`} class="btn btn--filled">Discuss your project</a>
+      </div>
+      <div class="svc-block__panel rise">
+        <div class="panel-stat"><span class="panel-stat__n">EDM · Hip hop</span><span class="panel-stat__l">Home turf</span></div>
+        <hr class="hairline" />
+        <div class="panel-stat"><span class="panel-stat__n">Film · TV · Albums</span><span class="panel-stat__l">And everything between</span></div>
+        <hr class="hairline" />
+        <div class="panel-stat"><span class="panel-stat__n">Remote friendly</span><span class="panel-stat__l">Working online has never been easier</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mastering -->
+  <section id="mastering" class="section svc-block">
+    <div class="wrap svc-block__inner">
+      <div class="svc-block__copy rise">
+        <p class="eyebrow">03 · Mastering</p>
+        <h2 class="heading">The final polish, stem or stereo</h2>
+        <p>Whether you are after stem mastering or stereo mastering, drop me a line and we can run through your needs and aims over a virtual coffee. As a mix engineer and producer for the best part of thirty five years, I am well practised at both, whatever the genre.</p>
+        <p>I love a challenge. I recently mastered a fourteen minute piece for a theatre performance. Whether it is rock, hip hop, EDM or Armenian accordion folk, I will master it.</p>
+        <a href={`${base}/contact`} class="btn btn--filled">Send me your mix</a>
+      </div>
+      <div class="svc-block__art rise"><AudioSphere size="360px" /></div>
+    </div>
+  </section>
+
+  <section class="section section--taupe">
+    <div class="wrap cta-band rise">
+      <div>
+        <h2 class="heading">Not sure which you need?</h2>
+        <p class="lead body-muted">Start with a free, no obligation chat. We will figure out the right next step for your music together.</p>
+      </div>
+      <a href={`${base}/contact`} class="btn btn--filled">Get in touch</a>
+    </div>
+  </section>
+
+  <style>
+    .phead { padding: 80px 0 48px; max-width: 760px; }
+    .phead .display { margin: 8px 0 20px; }
+
+    .svc-block__inner { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 64px; align-items: center; }
+    .svc-block__inner--rev .svc-block__copy { order: 2; }
+    .svc-block__copy h2 { margin: 6px 0 20px; }
+    .svc-block__copy .btn { margin-top: 28px; }
+    .svc-block__art { display: grid; place-items: center; }
+
+    .ticks { list-style: none; margin: 24px 0 0; display: flex; flex-direction: column; gap: 12px; }
+    .ticks li { position: relative; padding-left: 30px; color: var(--graphite); }
+    .ticks li::before { content: ''; position: absolute; left: 0; top: 7px; width: 14px; height: 8px; border-left: 2px solid var(--ember-orange); border-bottom: 2px solid var(--ember-orange); transform: rotate(-45deg); }
+
+    .svc-block__panel { background: var(--eggshell); border-radius: var(--radius-large); padding: 32px; box-shadow: var(--shadow-subtle); display: flex; flex-direction: column; gap: 20px; }
+    .panel-stat { display: flex; flex-direction: column; gap: 4px; }
+    .panel-stat__n { font-family: var(--font-display); font-size: 22px; font-weight: 400; letter-spacing: -0.02em; }
+    .panel-stat__l { font-size: 14px; color: var(--smoke); }
+
+    .cta-band { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+    .cta-band > div { max-width: 560px; }
+    .cta-band h2 { margin-bottom: 10px; }
+
+    @media (max-width: 900px) {
+      .svc-block__inner { grid-template-columns: 1fr; gap: 40px; }
+      .svc-block__inner--rev .svc-block__copy { order: 0; }
+      .svc-block__art { order: -1; }
+    }
+  </style>
+</Layout>

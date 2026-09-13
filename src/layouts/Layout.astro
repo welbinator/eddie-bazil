@@ -1,0 +1,123 @@
+---
+import '../styles/global.css';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const isStaging = base !== '';
+const { title, description } = Astro.props;
+const nav = [
+  { href: `${base}/`, label: 'Home' },
+  { href: `${base}/about`, label: 'About' },
+  { href: `${base}/services`, label: 'Services' },
+  { href: `${base}/friends`, label: 'Friends' },
+  { href: `${base}/contact`, label: 'Contact' },
+];
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {isStaging && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="nav">
+      <div class="wrap nav__inner">
+        <a href={`${base}/`} class="nav__logo">Eddie&nbsp;Bazil</a>
+        <nav class="nav__links">
+          {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+        </nav>
+        <a href={`${base}/contact`} class="btn btn--filled nav__cta">Book a consultation</a>
+        <button class="nav__toggle" aria-label="Toggle menu" id="navToggle">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <nav class="nav__mobile" id="navMobile">
+        {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+        <a href={`${base}/contact`} class="btn btn--filled">Book a consultation</a>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <hr class="hairline" />
+        <div class="footer__inner">
+          <div>
+            <div class="footer__logo">Eddie Bazil</div>
+            <p class="body-muted footer__tag">Sound design, mixing, mastering and one to one tuition. Over three decades behind the desk.</p>
+          </div>
+          <div class="footer__cols">
+            <div>
+              <div class="footer__h">Explore</div>
+              {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+            </div>
+            <div>
+              <div class="footer__h">Elsewhere</div>
+              <a href="https://www.soundonsound.com" target="_blank" rel="noopener">Sound On Sound</a>
+              <a href={`${base}/friends`}>Trusted partners</a>
+              <a href={`${base}/contact`}>Get in touch</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer__legal body-muted">
+          <span>© {new Date().getFullYear()} Eddie Bazil. All rights reserved.</span>
+          <span>Recording Academy professional member, approved educator and mentor.</span>
+        </div>
+      </div>
+    </footer>
+
+    <style>
+      .nav { position: sticky; top: 0; z-index: 50; background: rgba(253,252,252,0.82); backdrop-filter: blur(12px); border-bottom: 1px solid var(--stone); }
+      .nav__inner { display: flex; align-items: center; gap: 32px; height: 68px; }
+      .nav__logo { font-family: var(--font-display); font-weight: 500; font-size: 20px; letter-spacing: -0.02em; }
+      .nav__links { display: flex; gap: 28px; margin-left: 8px; }
+      .nav__links a { font-size: 15px; color: var(--graphite); transition: color .2s; }
+      .nav__links a:hover { color: var(--ink); }
+      .nav__cta { margin-left: auto; padding: 10px 18px; font-size: 14px; }
+      .nav__toggle { display: none; flex-direction: column; gap: 5px; background: none; border: 0; cursor: pointer; margin-left: auto; }
+      .nav__toggle span { width: 24px; height: 2px; background: var(--ink); display: block; }
+      .nav__mobile { display: none; flex-direction: column; gap: 4px; padding: 16px var(--gutter) 24px; border-bottom: 1px solid var(--stone); }
+      .nav__mobile a { padding: 10px 0; font-size: 17px; color: var(--graphite); }
+      .nav__mobile .btn { margin-top: 8px; justify-content: center; }
+      .nav__mobile.open { display: flex; }
+
+      .footer { padding: 64px 0 40px; }
+      .footer__inner { display: flex; justify-content: space-between; gap: 48px; padding-top: 48px; flex-wrap: wrap; }
+      .footer__logo { font-family: var(--font-display); font-size: 24px; font-weight: 400; }
+      .footer__tag { max-width: 340px; margin-top: 12px; font-size: 15px; }
+      .footer__cols { display: flex; gap: 72px; }
+      .footer__h { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ash); margin-bottom: 14px; }
+      .footer__cols a { display: block; font-size: 15px; color: var(--smoke); padding: 5px 0; }
+      .footer__cols a:hover { color: var(--ink); }
+      .footer__legal { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-top: 48px; font-size: 13px; }
+
+      @media (max-width: 900px) {
+        .nav__links, .nav__cta { display: none; }
+        .nav__toggle { display: flex; }
+        .footer__inner { flex-direction: column; gap: 32px; }
+        .footer__cols { gap: 48px; }
+      }
+    </style>
+
+    <script is:inline>
+      document.documentElement.classList.add('js');
+      const t = document.getElementById('navToggle');
+      const m = document.getElementById('navMobile');
+      if (t && m) t.addEventListener('click', () => m.classList.toggle('open'));
+      const risers = [...document.querySelectorAll('.rise')];
+      const io = new IntersectionObserver((es) => es.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      }), { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      risers.forEach((el) => io.observe(el));
+      setTimeout(() => risers.forEach((el) => el.classList.add('in')), 2500);
+    </script>
+  </body>
+</html>

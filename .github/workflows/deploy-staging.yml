@@ -1,0 +1,75 @@
+name: Deploy staging to GitHub Pages
+
+# Staging previewer for an ASTRO SOURCE repo (not pre-built HTML). Builds on the
+# `staging` branch with the Pages base path, then injects no-index protection at
+# BUILD TIME into dist/ so the noindex tag never lands in the repo and can't leak
+# to the live production site (Model B — pipeline decides, not the branch/file).
+#
+# Use THIS template when the staging branch holds Astro SOURCE. Use the plain
+# templates/deploy-staging.yml only when the branch already holds built HTML.
+
+on:
+  push:
+    branches: [staging]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout staging
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build (with Pages base path)
+        env:
+          PAGES_BASE: /${{ github.event.repository.name }}/
+        run: npm run build
+
+      - name: Inject noindex meta tag into all built HTML files
+        run: |
+          find dist -name '*.html' -print0 \
+            | xargs -0 -I{} sed -i \
+              's#<head>#<head>\n<meta name="robots" content="noindex, nofollow">#I' {}
+          echo "Injected noindex into:"
+          grep -rl 'noindex' --include='*.html' dist || true
+
+      # NOTE: keep the block scalar `run: |` here. A plain `run: printf '...Disallow: /...'`
+      # contains a colon-space and breaks YAML at startup (0 jobs, no logs, dispatch 422
+      # "no workflow_dispatch trigger"). Block scalar avoids it.
+      - name: Write blocking robots.txt
+        run: |
+          printf 'User-agent: *\nDisallow: /\n' > dist/robots.txt
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

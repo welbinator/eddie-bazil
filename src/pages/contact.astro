@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AudioSphere from '../components/AudioSphere.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Layout title="Contact Eddie Bazil | Book a free consultation" description="Get in touch with Eddie Bazil for tuition, mixing, production or mastering. Every enquiry starts with a free 30 minute consultation, no obligation.">
+
+  <section class="contact">
+    <div class="wrap contact__inner">
+      <div class="contact__copy">
+        <p class="eyebrow">Contact</p>
+        <h1 class="display">Let's have a chat.</h1>
+        <p class="lead">Tell me a little about you and your music. Every enquiry starts with a free 30 minute consultation over a virtual coffee, with no obligation whatsoever. Whether or not we work together, you will leave with honest, detailed advice.</p>
+
+        <div class="contact__points">
+          <div class="cpoint"><span class="cpoint__k">Response</span><span class="cpoint__v">Usually within a day or two</span></div>
+          <hr class="hairline" />
+          <div class="cpoint"><span class="cpoint__k">Location</span><span class="cpoint__v">Based in the UK, working remotely worldwide</span></div>
+          <hr class="hairline" />
+          <div class="cpoint"><span class="cpoint__k">Best for</span><span class="cpoint__v">Tuition, mixing, production and mastering</span></div>
+        </div>
+
+        <div class="contact__sphere"><AudioSphere size="180px" float={false} /></div>
+      </div>
+
+      <div class="contact__form-wrap">
+        <form class="cform" id="contactForm" method="POST" action="#">
+          <div class="cform__row">
+            <label>Your name
+              <input type="text" name="name" required autocomplete="name" placeholder="Jane Producer" />
+            </label>
+            <label>Email
+              <input type="email" name="email" required autocomplete="email" placeholder="you@email.com" />
+            </label>
+          </div>
+          <label>What are you after?
+            <select name="service">
+              <option value="">Choose one</option>
+              <option>Private tuition</option>
+              <option>Mixing & production</option>
+              <option>Mastering</option>
+              <option>Not sure yet</option>
+            </select>
+          </label>
+          <label>Tell me about your project
+            <textarea name="message" rows="5" required placeholder="Your goals, genre, where you are up to, and how I can help."></textarea>
+          </label>
+          <button type="submit" class="btn btn--filled cform__submit">Send enquiry</button>
+          <p class="cform__note">By sending this you agree to be contacted about your enquiry. Nothing more, no lists.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .contact { padding: 72px 0 96px; }
+    .contact__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+    .contact__copy .display { margin: 8px 0 20px; }
+    .contact__points { margin-top: 40px; display: flex; flex-direction: column; gap: 16px; }
+    .cpoint { display: flex; justify-content: space-between; gap: 16px; }
+    .cpoint__k { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ash); }
+    .cpoint__v { font-size: 15px; color: var(--graphite); text-align: right; }
+    .contact__sphere { margin-top: 48px; }
+
+    .cform { background: var(--warm-taupe); border-radius: var(--radius-large); padding: 36px; display: flex; flex-direction: column; gap: 20px; }
+    .cform__row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .cform label { display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 500; color: var(--graphite); }
+    .cform input, .cform select, .cform textarea {
+      font-family: var(--font-body); font-size: 15px; font-weight: 400;
+      padding: 12px 14px; border: 1px solid var(--stone); border-radius: 8px;
+      background: var(--eggshell); color: var(--ink); width: 100%;
+    }
+    .cform input:focus, .cform select:focus, .cform textarea:focus { outline: none; border-color: var(--graphite); box-shadow: 0 0 0 3px rgba(0,0,0,0.05); }
+    .cform textarea { resize: vertical; }
+    .cform__submit { justify-content: center; margin-top: 4px; }
+    .cform__note { font-size: 12px; color: var(--ash); text-align: center; }
+
+    @media (max-width: 900px) {
+      .contact__inner { grid-template-columns: 1fr; gap: 40px; }
+      .cform__row { grid-template-columns: 1fr; }
+    }
+  </style>
+</Layout>

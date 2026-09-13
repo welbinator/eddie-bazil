@@ -1,0 +1,41 @@
+---
+// The signature ElevenLabs "audio sphere": soft radial violet to orange gradient,
+// no hard edge, with a play glyph. Decoration only (spec: sparks never used for UI chrome).
+const { size = '440px', float = true } = Astro.props;
+---
+<div class={`sphere ${float ? 'sphere--float' : ''}`} style={`--size:${size}`} aria-hidden="true">
+  <div class="sphere__glow"></div>
+  <div class="sphere__core"></div>
+  <div class="sphere__ring"></div>
+  <div class="sphere__ring sphere__ring--2"></div>
+  <div class="sphere__play">
+    <svg viewBox="0 0 24 24" width="26" height="26"><path d="M8 5v14l11-7z" fill="#fff"/></svg>
+  </div>
+</div>
+<style>
+  .sphere { position: relative; width: var(--size); height: var(--size); max-width: 100%; aspect-ratio: 1; display: grid; place-items: center; }
+  .sphere__core {
+    position: absolute; inset: 12%;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 34% 30%, #ffd9c2 0%, #ff8a4c 20%, #ff4704 42%, #b41fb0 66%, #0447ff 86%, #02258a 100%);
+    filter: saturate(1.05);
+  }
+  .sphere__glow {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 34%, rgba(255,71,4,0.35), rgba(4,71,255,0.28) 55%, transparent 72%);
+    filter: blur(28px);
+  }
+  .sphere__ring { position: absolute; inset: 4%; border-radius: 50%; border: 1px solid var(--stone); }
+  .sphere__ring--2 { inset: -6%; border-color: rgba(235,232,228,0.7); }
+  .sphere__play {
+    position: relative; z-index: 2;
+    width: 64px; height: 64px; border-radius: 50%;
+    background: rgba(0,0,0,0.55); backdrop-filter: blur(4px);
+    display: grid; place-items: center; padding-left: 3px;
+  }
+  .sphere--float { animation: floaty 7s ease-in-out infinite; }
+  @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+  @media (prefers-reduced-motion: reduce) { .sphere--float { animation: none; } }
+</style>

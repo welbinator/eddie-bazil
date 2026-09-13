@@ -1,0 +1,160 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AudioSphere from '../components/AudioSphere.astro';
+import { testimonials } from '../data/content';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const services = [
+  { t: 'One to one tuition', d: 'Private lessons built around you, not a fixed syllabus. Sound design, mixing and production, taught the old school way with the fun left in.', href: `${base}/services#tuition` },
+  { t: 'Mixing & production', d: 'From rough idea to a finished record ready for streaming or release. EDM and hip hop are home turf, but the desk has seen every genre.', href: `${base}/services#mixing` },
+  { t: 'Mastering', d: 'Stem or stereo, any genre. Thirty five years of ears on the final polish, whether it is a club single or a fourteen minute theatre piece.', href: `${base}/services#mastering` },
+];
+const featured = testimonials.slice(0, 3);
+---
+<Layout title="Eddie Bazil | Sound design, mixing, mastering & tuition" description="Eddie Bazil is a UK sound designer, mix engineer and educator with over 35 years behind the desk. Private tuition, mixing and production, and mastering for artists at every level.">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero__inner">
+      <div class="hero__copy">
+        <p class="eyebrow">Sound designer · Mix engineer · Educator</p>
+        <h1 class="display">Want to make music that actually sounds finished?</h1>
+        <p class="lead">I am Eddie Bazil. For more than three decades I have been designing sound, mixing records and teaching people how the craft really works. Let me help you get there faster.</p>
+        <div class="hero__cta">
+          <a href={`${base}/contact`} class="btn btn--filled">Book a free consultation</a>
+          <a href={`${base}/services`} class="btn btn--outline">See how I work</a>
+        </div>
+        <p class="hero__note">Free 30 minute consultation, no obligation.</p>
+      </div>
+      <div class="hero__art">
+        <AudioSphere size="420px" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Credibility strip -->
+  <section class="strip">
+    <div class="wrap strip__inner">
+      <div><span class="strip__n">35+</span><span class="strip__l">years behind the desk</span></div>
+      <hr class="strip__div" />
+      <div><span class="strip__n">25+</span><span class="strip__l">years teaching</span></div>
+      <hr class="strip__div" />
+      <div><span class="strip__n">1000s</span><span class="strip__l">of sounds shipped in hardware & software</span></div>
+      <hr class="strip__div" />
+      <div><span class="strip__n">Grammy</span><span class="strip__l">Recording Academy approved educator</span></div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <p class="eyebrow">How I can help</p>
+        <h2 class="heading">Three ways to work together</h2>
+        <p class="lead body-muted">Every course and every project is built around one person's goals. No templates, no filler, just the skills you actually need.</p>
+      </div>
+      <div class="grid grid-3">
+        {services.map((s) => (
+          <a href={s.href} class="card svc rise">
+            <h3 class="heading-sm">{s.t}</h3>
+            <p class="body-muted">{s.d}</p>
+            <span class="svc__more">Learn more →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Bio teaser -->
+  <section class="section section--taupe">
+    <div class="wrap bio">
+      <div class="bio__photo rise">
+        <img src={`${base}/images/eddie-bazil-about.jpg`} alt="Eddie Bazil in his studio, flanked by monitors and a microphone" width="720" height="205" />
+      </div>
+      <div class="bio__copy rise">
+        <p class="eyebrow">Who am I</p>
+        <h2 class="heading">From an Arp 2600 to the Recording Academy</h2>
+        <p>I come from a musical family and I have always been fascinated by sound. That fascination turned into programming synths for Art of Noise, Pet Shop Boys, DJ Shadow and Spandau Ballet, then designing sound ROMs for Emu, Ensoniq, Akai and Roland.</p>
+        <p>These days I write and record podcasts for Sound On Sound, mentor for the Recording Academy, and teach a handful of students a year. I would love for you to be one of them.</p>
+        <a href={`${base}/about`} class="btn btn--outline">Read the full story</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <p class="eyebrow">Hear it from my students</p>
+        <h2 class="heading">Words from the people I have worked with</h2>
+      </div>
+      <div class="grid grid-3">
+        {featured.map((t) => (
+          <figure class="card quote rise">
+            <blockquote>“{t.quote}”</blockquote>
+            <figcaption>
+              <span class="quote__name">{t.name}</span>
+              <span class="quote__role">{t.role}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="wrap">
+      <div class="cta rise">
+        <div class="cta__sphere"><AudioSphere size="200px" float={false} /></div>
+        <h2 class="heading">Let's talk about your music</h2>
+        <p class="lead body-muted">Tell me your goals over a virtual coffee. Whether you hire me or not, you will leave with honest, detailed advice.</p>
+        <a href={`${base}/contact`} class="btn btn--filled">Start a conversation</a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .hero { padding: 88px 0 72px; }
+    .hero__inner { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; }
+    .hero__copy .display { margin: 8px 0 24px; }
+    .hero__cta { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+    .hero__note { font-family: var(--font-mono); font-size: 13px; color: var(--ash); margin-top: 16px; }
+    .hero__art { display: grid; place-items: center; }
+
+    .strip { border-top: 1px solid var(--stone); border-bottom: 1px solid var(--stone); }
+    .strip__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 32px 0; flex-wrap: wrap; }
+    .strip__inner > div { display: flex; flex-direction: column; gap: 4px; }
+    .strip__n { font-family: var(--font-display); font-size: 30px; font-weight: 400; letter-spacing: -0.02em; }
+    .strip__l { font-size: 13px; color: var(--smoke); max-width: 180px; }
+    .strip__div { width: 1px; height: 46px; background: var(--stone); border: 0; }
+
+    .sec-head { max-width: 640px; margin-bottom: 48px; }
+    .sec-head .heading { margin: 6px 0 16px; }
+
+    .svc { display: flex; flex-direction: column; gap: 14px; transition: transform .2s ease, background .2s ease; }
+    .svc:hover { transform: translateY(-3px); background: var(--stone); }
+    .svc__more { margin-top: auto; font-size: 14px; font-weight: 500; color: var(--ink); }
+
+    .bio { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    .bio__photo img { border-radius: var(--radius-large); filter: grayscale(0.1); box-shadow: var(--shadow-subtle); }
+    .bio__copy .btn { margin-top: 24px; }
+
+    .quote { display: flex; flex-direction: column; gap: 24px; }
+    .quote blockquote { font-size: 16px; line-height: 1.6; color: var(--graphite); }
+    .quote figcaption { display: flex; flex-direction: column; gap: 2px; margin-top: auto; }
+    .quote__name { font-weight: 500; }
+    .quote__role { font-size: 13px; color: var(--ash); }
+
+    .cta { background: var(--warm-taupe); border-radius: var(--radius-large); padding: 72px 48px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .cta__sphere { margin-bottom: 8px; }
+    .cta .lead { max-width: 520px; }
+    .cta .btn { margin-top: 8px; }
+
+    @media (max-width: 900px) {
+      .hero__inner, .bio { grid-template-columns: 1fr; }
+      .hero__art { order: -1; }
+      .strip__div { display: none; }
+      .cta { padding: 48px 24px; }
+    }
+  </style>
+</Layout>
